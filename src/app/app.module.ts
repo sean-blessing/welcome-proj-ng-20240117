@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { NameWelcomeComponent } from './name-welcome/name-welcome.component';
 import { AddressWelcomeComponent } from './address-welcome/address-welcome.component';
 import { FormsModule } from '@angular/forms';
+import { MenuComponent } from './core/menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NameWelcomeComponent,
-    AddressWelcomeComponent
+    AddressWelcomeComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

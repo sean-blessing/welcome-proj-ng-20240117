@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Address } from '../model/address';
+import { SystemService } from '../service/system.service';
 
 @Component({
   selector: 'app-address-welcome',
@@ -17,12 +18,16 @@ export class AddressWelcomeComponent {
 
   newAddress: Address = new Address();
 
-  constructor() {}
+  constructor(private sysSvc: SystemService) {}
 
   ngOnInit() {
-    let address1: Address = new Address(this.street, this.city, this.state, this.zip);
-    let address2: Address = new Address("1212 Welcome Way", "Columbus", "OH", "48777");
-    this.addresses = [address1, address2];
+    this.addresses = this.sysSvc.addresses;
+    if (this.addresses.length==0) {
+      let address1: Address = new Address(this.street, this.city, this.state, this.zip);
+      let address2: Address = new Address("1212 Welcome Way", "Columbus", "OH", "48777");
+      this.addresses = [address1, address2];
+      this.sysSvc.addresses = this.addresses;
+    }
   }
 
   save() {
@@ -30,6 +35,7 @@ export class AddressWelcomeComponent {
                                         this.newAddress.state, this.newAddress.zip);
     this.addresses.push(address);
     this.newAddress = new Address();
+    this.sysSvc.addresses = this.addresses;
   }
 
 
